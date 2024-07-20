@@ -27,12 +27,7 @@ if (empty($_POST['amount'])) {
     return false;
 }
 $date = date('Y-m-d');
-function isBetween10AMand6PM() {
-    $currentHour = date('H');
-    $startTimestamp = strtotime('10:00:00');
-    $endTimestamp = strtotime('18:00:00');
-    return ($currentHour >= date('H', $startTimestamp)) && ($currentHour < date('H', $endTimestamp));
-}
+
 
 $user_id = $db->escapeString($_POST['user_id']);
 $amount = $db->escapeString($_POST['amount']);
@@ -66,12 +61,7 @@ $min_withdrawal = $res[0]['min_withdrawal'];
 $referred_by = $res[0]['referred_by'];
 $reg_date = $res[0]['reg_date'];
 
-if (!isBetween10AMand6PM()) {
-    $response['success'] = false;
-    $response['message'] = "Withdrawal time morning 10:00AM to 6PM";
-    print_r(json_encode($response));
-    return false;
-}
+
 
 $dayOfWeek = date('w');
 
